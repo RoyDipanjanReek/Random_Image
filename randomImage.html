@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body >
+    <h1 style="text-align: center;">Random Image Project</h1>
+    <div class="container" style="height: 100px; width: 300px;">    
+        
+    </div>
+    
+    <button id="btn" style="align-items: center; margin-left: 40%; height: 50px; background-color: chartreuse; font-size: larger; border-radius: 50px; border-color: blue; ">Change Photo</button>
+</body>
+<script>
+    const button = document.querySelector('#btn')
+    let apiLink = "https://api.thecatapi.com/v1/images/search";
+function fetchApi(){
+    fetch(apiLink)
+    .then((response) => response.json())
+
+    .then((data) => {      
+    const imageUrl = data[0].url;
+
+    let image = document.createElement("img")
+    image.src= imageUrl;
+
+    const container = document.querySelector('.container');
+    container.appendChild(image);
+})
+.catch((error) =>{
+    console.log("error", error);
+})
+}
+button.addEventListener('click',fetchApi)
+</script>
+</html>
